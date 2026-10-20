@@ -68,3 +68,20 @@
   * `DELETE /api/livros/{id}` — Remove um livro do acervo.
   * `POST /api/livros/{id}/emprestar` — Registra empréstimo e calcula data de devolução.
   * `POST /api/livros/{id}/devolver` — Define o status como `DISPONIVEL` e limpa as datas.
+
+* **Pseudocódigo da Regra de Negócio (Empréstimo com Cálculo de Devolução):**
+```text
+Função emprestarLivro(livroId):
+    livro = repository.buscarPorId(livroId)
+    
+    Se livro.status == "EMPRESTADO" Então
+        LançarErro("Este livro já está emprestado no momento.")
+    FimSe
+    
+    livro.status = "EMPRESTADO"
+    livro.dataEmprestimo = hoje()
+    livro.dataDevolucaoPrevista = hoje() + 7 dias
+    
+    Retornar repository.salvar(livro)
+FimFuncao
+```
