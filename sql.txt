@@ -1,0 +1,11 @@
+CREATE DATABASE ClubeLivro;
+USE ClubeLivro;
+
+CREATE TABLE livro (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    titulo VARCHAR(150),
+    dono VARCHAR(150),
+    status VARCHAR(20) DEFAULT 'DISPONIVEL',
+    dataEmprestimo DATE,
+    dataDevolucaoPrevista DATE
+);
