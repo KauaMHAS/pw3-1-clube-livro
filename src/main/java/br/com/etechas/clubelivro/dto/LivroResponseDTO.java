@@ -2,14 +2,12 @@ package br.com.etechas.clubelivro.dto;
 
 import java.time.LocalDate;
 
-public record LivroReponseDTO(
-
+public record LivroResponseDTO(
         Integer id,
         String titulo,
         String dono,
         String status,
         LocalDate dataEmprestimo,
-        LocalDate dataDevolucao
+        LocalDate dataDevolucaoPrevista
 ) {
-
 }

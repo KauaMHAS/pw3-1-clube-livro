@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 public class Livro {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
