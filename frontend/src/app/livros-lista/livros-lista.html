@@ -1,0 +1,46 @@
+<div class="container">
+    <h1>Acervo de Livros</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Dono</th>
+                <th>Status</th>
+                <th>Data de Empréstimo</th>
+                <th>Devolução Prevista</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (livro of livros; track livro.id) {
+                <tr>
+                    <td>{{ livro.id }}</td>
+                    <td>{{ livro.titulo }}</td>
+                    <td>{{ livro.dono }}</td>
+                    <td>{{ livro.status }}</td>
+                    <td>{{ livro.dataEmprestimo || '-' }}</td>
+                    <td>{{ livro.dataDevolucaoPrevista || '-' }}</td>
+                    <td>
+                        @if (livro.status === 'DISPONIVEL') {
+                            <button class="emprestar" (click)="emprestarLivro(livro.id)">
+                                Emprestar
+                            </button>
+                        } @else {
+                            <button class="devolver" (click)="devolverLivro(livro.id)">
+                                Devolver
+                            </button>
+                        }
+                        <button class="excluir" (click)="excluirLivro(livro.id, livro.titulo)">
+                            Excluir
+                        </button>
+                    </td>
+                </tr>
+            } @empty {
+                <tr>
+                    <td colspan="7">Nenhum livro cadastrado.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
