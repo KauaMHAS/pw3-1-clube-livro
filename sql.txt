@@ -9,3 +9,18 @@ CREATE TABLE livro (
     dataEmprestimo DATE,
     dataDevolucaoPrevista DATE
 );
+
+INSERT INTO livro (titulo, dono, status, dataEmprestimo, dataDevolucaoPrevista)
+VALUES
+('Dom Casmurro', 'Machado Silva', 'DISPONIVEL', NULL, NULL),
+('O Pequeno Príncipe', 'Ana Souza', 'DISPONIVEL', NULL, NULL),
+('1984', 'Carlos Oliveira', 'EMPRESTADO', '2026-11-10', '2026-11-30'),
+('A Revolução dos Bichos', 'Mariana Costa', 'EMPRESTADO', '2026-11-15', '2026-12-05'),
+('O Hobbit', 'Pedro Santos', 'DISPONIVEL', NULL, NULL),
+('Harry Potter e a Pedra Filosofal', 'Lucas Ferreira', 'EMPRESTADO', '2026-11-18', '2026-12-02'),
+('Capitães da Areia', 'Beatriz Lima', 'DISPONIVEL', NULL, NULL),
+('O Cortiço', 'Gabriel Alves', 'DISPONIVEL', NULL, NULL),
+('A Metamorfose', 'Julia Martins', 'EMPRESTADO', '2026-11-20', '2026-12-10'),
+('Percy Jackson e o Ladrão de Raios', 'Rafael Souza', 'DISPONIVEL', NULL, NULL);
+
+SELECT * FROM livro;
