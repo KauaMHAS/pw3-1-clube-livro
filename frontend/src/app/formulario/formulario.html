@@ -1,0 +1,65 @@
+<div class="container">
+    <h1>{{ modoEdicao ? 'Editar Livro' : 'Cadastrar Livro' }}</h1>
+    <form [formGroup]="formulario" (ngSubmit)="salvar()">
+        <div class="campo">
+            <label for="titulo">Título do livro</label>
+            <input
+                id="titulo"
+                type="text"
+                formControlName="titulo"
+                maxlength="150"
+                placeholder="Digite o título do livro"
+            >
+            @if (formulario.controls.titulo.touched && formulario.controls.titulo.errors) {
+                <div class="erro">
+                    @if (formulario.controls.titulo.errors['required']) {
+                        <span>O título é obrigatório.</span>
+                    }
+                    @if (formulario.controls.titulo.errors['minlength']) {
+                        <span>O título deve ter pelo menos 2 caracteres.</span>
+                    }
+                    @if (formulario.controls.titulo.errors['maxlength']) {
+                        <span>O título deve ter no máximo 150 caracteres.</span>
+                    }
+                    @if (formulario.controls.titulo.errors['pattern']) {
+                        <span>O título não pode conter apenas espaços.</span>
+                    }
+                </div>
+            }
+        </div>
+        <div class="campo">
+            <label for="dono">Dono do livro</label>
+            <input
+                id="dono"
+                type="text"
+                formControlName="dono"
+                maxlength="150"
+                placeholder="Digite o nome do dono"
+            >
+            @if (formulario.controls.dono.touched && formulario.controls.dono.errors) {
+                <div class="erro">
+                    @if (formulario.controls.dono.errors['required']) {
+                        <span>O dono é obrigatório.</span>
+                    }
+                    @if (formulario.controls.dono.errors['minlength']) {
+                        <span>O nome deve ter pelo menos 2 caracteres.</span>
+                    }
+                    @if (formulario.controls.dono.errors['maxlength']) {
+                        <span>O nome deve ter no máximo 150 caracteres.</span>
+                    }
+                    @if (formulario.controls.dono.errors['pattern']) {
+                        <span>O nome não pode conter apenas espaços.</span>
+                    }
+                </div>
+            }
+        </div>
+        <div class="acoes">
+            <button type="submit" class="salvar">
+                {{ modoEdicao ? 'Atualizar Livro' : 'Cadastrar Livro' }}
+            </button>
+            <button type="button" class="cancelar" (click)="cancelar()">
+                Cancelar
+            </button>
+        </div>
+    </form>
+</div>

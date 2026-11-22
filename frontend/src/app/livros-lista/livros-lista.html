@@ -1,6 +1,15 @@
 <div class="container">
-    <h1>Acervo de Livros</h1>
+
+    <div class="cabecalho">
+        <h1>Clube de Livros</h1>
+
+        <a routerLink="/livros/novo" class="novo">
+            Cadastrar Livro
+        </a>
+    </div>
+
     <table>
+
         <thead>
             <tr>
                 <th>ID</th>
@@ -12,7 +21,9 @@
                 <th>Ações</th>
             </tr>
         </thead>
+
         <tbody>
+
             @for (livro of livros; track livro.id) {
                 <tr>
                     <td>{{ livro.id }}</td>
@@ -21,7 +32,13 @@
                     <td>{{ livro.status }}</td>
                     <td>{{ livro.dataEmprestimo || '-' }}</td>
                     <td>{{ livro.dataDevolucaoPrevista || '-' }}</td>
+
                     <td>
+
+                        <a [routerLink]="['/livros/editar', livro.id]" class="editar">
+                            Editar
+                        </a>
+
                         @if (livro.status === 'DISPONIVEL') {
                             <button class="emprestar" (click)="emprestarLivro(livro.id)">
                                 Emprestar
@@ -31,9 +48,11 @@
                                 Devolver
                             </button>
                         }
+
                         <button class="excluir" (click)="excluirLivro(livro.id, livro.titulo)">
                             Excluir
                         </button>
+
                     </td>
                 </tr>
             } @empty {
@@ -41,6 +60,9 @@
                     <td colspan="7">Nenhum livro cadastrado.</td>
                 </tr>
             }
+
         </tbody>
+
     </table>
+
 </div>

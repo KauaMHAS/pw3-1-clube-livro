@@ -1,11 +1,12 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Livro } from '../models/livro';
 import { LivroService } from '../services/livro.service';
 
 @Component({
     selector: 'app-livros-lista',
     standalone: true,
-    imports: [],
+    imports: [RouterLink],
     templateUrl: './livros-lista.html',
     styleUrl: './livros-lista.css'
 })
