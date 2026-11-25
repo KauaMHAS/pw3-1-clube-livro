@@ -1,6 +1,7 @@
+
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, catchError, throwError } from 'rxjs';
 import { Livro } from '../models/livro';
 
 @Injectable({
@@ -8,7 +9,7 @@ import { Livro } from '../models/livro';
 })
 export class LivroService {
 
-  private apiUrl = 'http://localhost:8080/api/livros';
+    private apiUrl = 'http://localhost:8080/api/livros';
 
     constructor(private http: HttpClient) {}
 
@@ -33,7 +34,19 @@ export class LivroService {
     }
 
     emprestarLivro(id: number): Observable<Livro> {
-        return this.http.post<Livro>(`${this.apiUrl}/${id}/emprestar`, null);
+        return this.http.post<Livro>(`${this.apiUrl}/${id}/emprestar`, null).pipe(
+            catchError((erro: HttpErrorResponse) => {
+                if (erro.status === 409) {
+                    alert('Este livro já está emprestado.');
+                } else if (erro.status === 400) {
+                    alert('Não foi possível realizar o empréstimo. Verifique as informações.');
+                } else {
+                    alert('Não foi possível emprestar o livro.');
+                }
+
+                return throwError(() => erro);
+            })
+        );
     }
 
     devolverLivro(id: number): Observable<Livro> {

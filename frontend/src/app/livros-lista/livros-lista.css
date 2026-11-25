@@ -1,3 +1,4 @@
+
 .container {
     padding: 30px;
     max-width: 1200px;
@@ -59,4 +60,22 @@ button, .novo, .editar {
 
 .excluir {
     background-color: #f44336;
+}
+
+.status {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.status.disponivel {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status.emprestado {
+    background-color: #ffebee;
+    color: #c62828;
 }

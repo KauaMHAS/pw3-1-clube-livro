@@ -1,2 +1,1 @@
-#Nomes da dupla
-
+Kaua Mota Santos e Júlia Mattos

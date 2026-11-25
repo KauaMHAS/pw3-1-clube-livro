@@ -1,5 +1,6 @@
+
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Livro } from '../models/livro';
 import { LivroService } from '../services/livro.service';
@@ -13,36 +14,36 @@ import { LivroService } from '../services/livro.service';
 })
 export class LivroFormularioComponent implements OnInit {
 
-    formulario = new FormGroup({
-        titulo: new FormControl('', {
-            nonNullable: true,
-            validators: [
-                Validators.required,
-                Validators.minLength(2),
-                Validators.maxLength(150),
-                Validators.pattern(/\S/)
-            ]
-        }),
-        dono: new FormControl('', {
-            nonNullable: true,
-            validators: [
-                Validators.required,
-                Validators.minLength(2),
-                Validators.maxLength(150),
-                Validators.pattern(/\S/)
-            ]
-        })
-    });
+    formulario!: FormGroup<{
+        titulo: FormControl<string>;
+        dono: FormControl<string>;
+    }>;
 
     modoEdicao = false;
     idLivro: number | null = null;
     livroAtual: Livro | null = null;
 
     constructor(
+        private formBuilder: FormBuilder,
         private livroService: LivroService,
         private route: ActivatedRoute,
         private router: Router
-    ) {}
+    ) {
+        this.formulario = this.formBuilder.nonNullable.group({
+            titulo: ['', [
+                Validators.required,
+                Validators.minLength(2),
+                Validators.maxLength(150),
+                Validators.pattern(/\S/)
+            ]],
+            dono: ['', [
+                Validators.required,
+                Validators.minLength(2),
+                Validators.maxLength(150),
+                Validators.pattern(/\S/)
+            ]]
+        });
+    }
 
     ngOnInit(): void {
         const id = this.route.snapshot.paramMap.get('id');
@@ -62,7 +63,6 @@ export class LivroFormularioComponent implements OnInit {
         this.livroService.buscarPorId(this.idLivro).subscribe({
             next: (livro) => {
                 this.livroAtual = livro;
-
                 this.formulario.patchValue({
                     titulo: livro.titulo,
                     dono: livro.dono

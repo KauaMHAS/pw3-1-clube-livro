@@ -1,3 +1,4 @@
+
 <div class="container">
 
     <div class="cabecalho">
@@ -9,7 +10,6 @@
     </div>
 
     <table>
-
         <thead>
             <tr>
                 <th>ID</th>
@@ -23,18 +23,23 @@
         </thead>
 
         <tbody>
-
             @for (livro of livros; track livro.id) {
                 <tr>
                     <td>{{ livro.id }}</td>
                     <td>{{ livro.titulo }}</td>
                     <td>{{ livro.dono }}</td>
-                    <td>{{ livro.status }}</td>
+                    <td>
+                        <span
+                            class="status"
+                            [class.disponivel]="livro.status === 'DISPONIVEL'"
+                            [class.emprestado]="livro.status === 'EMPRESTADO'">
+                            {{ livro.status }}
+                        </span>
+                    </td>
                     <td>{{ livro.dataEmprestimo || '-' }}</td>
                     <td>{{ livro.dataDevolucaoPrevista || '-' }}</td>
 
                     <td>
-
                         <a [routerLink]="['/livros/editar', livro.id]" class="editar">
                             Editar
                         </a>
@@ -52,7 +57,6 @@
                         <button class="excluir" (click)="excluirLivro(livro.id, livro.titulo)">
                             Excluir
                         </button>
-
                     </td>
                 </tr>
             } @empty {
@@ -60,9 +64,7 @@
                     <td colspan="7">Nenhum livro cadastrado.</td>
                 </tr>
             }
-
         </tbody>
-
     </table>
 
 </div>

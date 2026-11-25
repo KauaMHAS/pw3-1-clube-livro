@@ -1,3 +1,4 @@
+
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Livro } from '../models/livro';
@@ -45,12 +46,8 @@ export class LivrosListaComponent implements OnInit {
                 alert('Livro emprestado com sucesso!');
                 this.carregarLivros();
             },
-            error: (erro) => {
-                if (erro.status === 409) {
-                    alert('Este livro já está emprestado.');
-                } else {
-                    alert('Não foi possível emprestar o livro.');
-                }
+            error: () => {
+                this.carregarLivros();
             }
         });
     }
